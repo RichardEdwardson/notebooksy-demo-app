@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import demoBlackboard from "../assets/demo_blackboard.jpeg"
 import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography';
 import LinearProgress from '@mui/material/LinearProgress';
 import axios from 'axios';
 
@@ -96,6 +97,19 @@ export default function FindBlackboard({ onFinish, onNewImage }) {
 
     return (
         <div>
+            <Box sx={{ width: '100%'}}
+             align="center"
+             >
+                <Typography variant="h3" gutterBottom>
+                    Notebooksy
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                    Contact: notebooksy@bbnote.ca
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                    (Click on 4 corners of a blackboard to begin)
+                </Typography>
+            </Box>
             <ImageUpload onChange={handleFile} />
             <ConfirmAction
                 open={showDialog}
@@ -126,9 +140,7 @@ export default function FindBlackboard({ onFinish, onNewImage }) {
                 }}
                 onPointerDown={drawPoint}
             >
-
             </div>
-            <h1>Select 4 corners of the blackboard</h1>
             <canvas
                 ref={canvasRef}
                 onPointerMove={e => {

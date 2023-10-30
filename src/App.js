@@ -26,13 +26,6 @@ function App() {
 
   return (
     <div style={{ height: '100vh' }}>
-      <h1
-      style={{
-        backgroundColor: "black",
-        color: "white",
-        textAlign: "center",
-      }}
-      >Contact support: notebooksy@bbnote.ca</h1>
       <SplitPane
         split='vertical'
         sizes={sizes}
