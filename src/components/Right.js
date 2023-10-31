@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, forwardRef } from 'react';
 import { Stage, Layer, Transformer, Image, Rect } from 'react-konva';
 import { useConfirm } from './Confirmation';
 import { Fab } from '@mui/material';
-import DownloadIcon from '@mui/icons-material/Download';
+import AppBar from '@mui/material/AppBar';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 
@@ -84,7 +84,7 @@ const NotePad = forwardRef(({ addImage, toggleClear }, ref) => {
 
 
     const checkDeselect = (e) => {
-        if (typeof(e) == "boolean") {
+        if (typeof (e) == "boolean") {
             selectShape(null)
         } else {
             // if (e.target === e.target.getStage()) {
@@ -119,12 +119,12 @@ const NotePad = forwardRef(({ addImage, toggleClear }, ref) => {
             >
                 <Layer>
                     <Rect
-                    x={0}
-                    y={0}
-                    width={612}
-                    height={792}
-                    fill={"white"}
-                    ref={pageRef}
+                        x={0}
+                        y={0}
+                        width={612}
+                        height={792}
+                        fill={"white"}
+                        ref={pageRef}
                     />
                     {notes.map((note, i) => {
                         return (
@@ -161,57 +161,64 @@ export default function WorkPlace({ receive }) {
     //const [selectedId, selectShape] = useState(null);
     return (
         <div
-            //style={{marginTop: "100px"}}    
+            className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow"
         >
-            <ButtonGroup
-                disableElevation
-                variant="contained"
-                aria-label="Disabled elevation buttons"
+            <div
+                className="px-4 py-1 sm:px-6"
             >
-                <Button
-                    onClick={() => {
-                        if (ref != null) {
-                            // try {
-                            //     
-                            // } catch (e) {
-                            //     console.log(e)
-                            // }
-                            //selectShape(null)
-                            ref.current.eventListeners.mousedown[0].handler(true)
-                            setTimeout(() => {
-                                const stage = ref.current
-                                const name = Date.now().toString() + ".png"
-                                const link = document.createElement('a');
-                                link.download = name;
-                                link.href = stage.toDataURL({ pixelRatio: 3 })
-                                document.body.appendChild(link);
-                                link.click();
-                                document.body.removeChild(link);
-                            }, 100);
-                            // const stage = ref.current
-                            // const name = Date.now().toString() + ".png"
-                            // const link = document.createElement('a');
-                            // link.download = name;
-                            // link.href = stage.toDataURL({ pixelRatio: 3 })
-                            // document.body.appendChild(link);
-                            // link.click();
-                            // document.body.removeChild(link);
-                        }
-                    }}
-                >Save</Button>
-                <Button
-                    onClick={async () => {
-                        const status = await getConfirmation('Clear page?');
-                        if (status) setToggleClear(!toggleClear)
-                    }}
-                >Clear</Button>
-            </ButtonGroup>
+                <ButtonGroup
+                    disableElevation
+                    variant="contained"
+                    aria-label="Disabled elevation buttons"
+                >
+                    <Button
+                        onClick={() => {
+                            if (ref != null) {
+                                // try {
+                                //     
+                                // } catch (e) {
+                                //     console.log(e)
+                                // }
+                                //selectShape(null)
+                                ref.current.eventListeners.mousedown[0].handler(true)
+                                setTimeout(() => {
+                                    const stage = ref.current
+                                    const name = Date.now().toString() + ".png"
+                                    const link = document.createElement('a');
+                                    link.download = name;
+                                    link.href = stage.toDataURL({ pixelRatio: 3 })
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                }, 100);
+                                // const stage = ref.current
+                                // const name = Date.now().toString() + ".png"
+                                // const link = document.createElement('a');
+                                // link.download = name;
+                                // link.href = stage.toDataURL({ pixelRatio: 3 })
+                                // document.body.appendChild(link);
+                                // link.click();
+                                // document.body.removeChild(link);
+                            }
+                        }}
+                    >Save</Button>
+                    <Button
+                        onClick={async () => {
+                            const status = await getConfirmation('Clear page?');
+                            if (status) setToggleClear(!toggleClear)
+                        }}
+                    >Clear</Button>
+                </ButtonGroup>
+            </div>
+
             <Confirmation />
-            <NotePad
-                ref={ref}
-                addImage={receive}
-                toggleClear={toggleClear}
-            />
+            <div class="px-4 py-5 sm:p-6">
+                <NotePad
+                    ref={ref}
+                    addImage={receive}
+                    toggleClear={toggleClear}
+                />
+            </div>
         </div>
     )
 };

@@ -3,48 +3,38 @@ import React, { useState, useRef, useEffect } from 'react';
 import SplitPane, { Pane } from 'split-pane-react';
 import Right from './components/Right';
 import Left from './components/Left';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import BottomNavigation from '@mui/material/BottomNavigation';
 
 function App() {
-  //const [sizes, setSizes] = React.useState([100, '8%', 'auto']);
   const [sizes, setSizes] = useState([]);
-  const canvasRef = useRef(null)
   const [imageTransfer, setImageTransfer] = useState(null);
 
-  // useEffect(() => {
-  //   console.log(imageTransfer.content)
-
-  // }, [imageTransfer])
-
-
-
-  const layoutCSS = {
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  };
-
   return (
-    <div style={{ height: '100vh' }}>
-      <SplitPane
-        split='vertical'
-        sizes={sizes}
-        onChange={setSizes}
+    <div
+      className="flex"
+    >
+      <div
+        className="w-full h-screen overflow-scroll"
       >
-        <Pane minSize='20%' maxSize='80%'>
-          <div style={{ ...layoutCSS, background: '#ddd' }}>
-            <Left send={setImageTransfer}
-            />
-          </div>
-        </Pane>
-        <Pane minSize='20%' maxSize='80%'>
-          <div style={{ ...layoutCSS, background: '#d5d7d9', overflowY: "scroll" }}>
-            <Right
-              receive={imageTransfer}
-            />
-          </div>
-        </Pane>
-      </SplitPane>
+        <Left
+          send={setImageTransfer}
+        />
+      </div>
+      <div
+        className="w-full h-screen"
+      >
+        
+        <Right
+          receive={imageTransfer}
+        />
+        <AppBar
+          position="static"
+        >
+          <Button color="inherit">Login</Button>
+        </AppBar>
+      </div>
     </div>
   );
 }

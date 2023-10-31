@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/components/GetNote.js"],
+  content: [
+    "./src/**/*.js",
+  ],
   theme: {
     extend: {},
   },

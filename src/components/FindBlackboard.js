@@ -96,20 +96,7 @@ export default function FindBlackboard({ onFinish, onNewImage }) {
     };
 
     return (
-        <div>
-            <Box sx={{ width: '100%'}}
-             align="center"
-             >
-                <Typography variant="h3" gutterBottom>
-                    Notebooksy
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                    Contact: notebooksy@bbnote.ca
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                    (Click on 4 corners of a blackboard to begin)
-                </Typography>
-            </Box>
+        <>           
             <ImageUpload onChange={handleFile} />
             <ConfirmAction
                 open={showDialog}
@@ -142,10 +129,12 @@ export default function FindBlackboard({ onFinish, onNewImage }) {
             >
             </div>
             <canvas
+                className="object-cover w-full"
                 ref={canvasRef}
                 onPointerMove={e => {
                     const { pageX, pageY } = e.nativeEvent;
-                    const { offsetLeft, offsetTop, parentElement: { parentElement: { scrollTop } } } = e.target;
+                    const { offsetLeft, offsetTop } = e.target;
+                    const scrollTop = e.target.parentElement.parentElement.parentElement.parentElement.scrollTop
                     const canvasX = pageX - offsetLeft;
                     const canvasY = pageY - offsetTop + scrollTop;
                     setPosition({ ...position, x: canvasX, y: canvasY });
@@ -158,7 +147,7 @@ export default function FindBlackboard({ onFinish, onNewImage }) {
                 </Box>
             }
 
-        </div>
+        </>
     );
 };
 
